@@ -1,0 +1,54 @@
+const ps=require('prompt-sync');
+const prompt=ps();
+
+
+var choice=0
+
+while(true){
+
+if(choice==0){
+    console.log("=================================================");
+    console.log("select your choice:");
+    console.log("\t1.Create a Musician\n\t2.Create a Troupe\n\t3.Add a Musician to a troupe\n\t4.Summary Description of a troupe\n\t5.Detailed description of a troupe\n\t6.Calculate the cost of a troupe for a number of hours\n\t7.Read a list of troupe names to be populated from a file\n\t8.Write a list of the detailed descriptions for all troupes to a given filename\n\t9.Exit");
+    choice=prompt('Enter your choice [1,2,3,4,5,6,7,8,9] :');
+}
+else if(choice==1){
+    
+    choice=0;
+}
+else if(choice==2){
+    
+    choice=0;
+}
+else if(choice==3){
+    
+    choice=0;
+}
+else if(choice==4){
+    
+    choice=0;
+}
+else if(choice==5){
+    
+    choice=0;
+}
+else if(choice==6){
+    
+    choice=0;
+}
+else if(choice==7){
+    
+    choice=0;
+}
+else if(choice==8){
+    
+    choice=0;
+}
+else if(choice==9){
+    
+    break;
+}
+
+
+
+}
