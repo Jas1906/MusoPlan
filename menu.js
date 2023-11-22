@@ -1,6 +1,9 @@
 const ps=require('prompt-sync');
 const prompt=ps();
 
+const {Musician,Troupe,Guitarist,Bassist,Percussionist,Flautist}=require('./classes.js');
+const programFunctions=require('./function.js');
+
 
 var choice=0
 
@@ -13,7 +16,7 @@ if(choice==0){
     choice=prompt('Enter your choice [1,2,3,4,5,6,7,8,9] :');
 }
 else if(choice==1){
-    
+    programFunctions.registerMusician();
     choice=0;
 }
 else if(choice==2){
