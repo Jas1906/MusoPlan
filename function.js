@@ -5,7 +5,8 @@ const fs=require('fs');
 
 const {Musician,Troupe,Guitarist,Bassist,Percussionist,Flautist}=require('./classes.js');
 
-var musicianDetails=new Array()
+var musicianDetails=new Array();
+var troupeDetails=new Array();
 
 function registerMusician() {
     // Prompt user for musician details
@@ -14,25 +15,25 @@ function registerMusician() {
     let hrate = parseFloat(prompt("Enter hourly rate (over 50):"));
     let ifact = prompt("Choose an instrument (Guitarist, Bassist, Percussionist, Flautist):");
 
-    // Validate musician name
+    
     while (mname.length < 3 || mname.length > 30) {
         console.log("Invalid musician name. It should be between 3 and 30 characters.");
         mname = prompt("Re-enter musician name:");
     }
 
-    // Validate years playing
+    
     while (isNaN(yplaying) || yplaying < 0) {
         console.log("Invalid value for years playing. It should be non-negative.");
         yplaying = parseInt(prompt("Re-enter years playing:"));
     }
 
-    // Validate hourly rate
+    
     while (isNaN(hrate) || hrate <= 50) {
         console.log("Invalid hourly rate. It should be over 50.");
         hrate = parseFloat(prompt("Re-enter hourly rate:"));
     }
 
-    // Create musician based on the chosen instrument
+    
     let musician;
     switch (ifact) {
         case 'Guitarist':
@@ -68,7 +69,7 @@ function registerMusician() {
             return;
     }
 
-    // Display registered musician details
+    
     console.log("Musician registered successfully!");
     console.log("Name: " + musician.musicianName);
     console.log("Years Playing: " + musician.yearsPlaying);
@@ -81,9 +82,52 @@ function musicianRegistration(musician){
     console.log(musicianDetails);
 }
 
+function registerTroupe(){
+    let tname="";
+    let tgenre="";
+    let tmduration=0;
+
+    while(true){
+        if(tname.length>=3 && tname.length<=30){
+            if(tgenre=="rock" || tgenre=="pop" || tgenre=="jazz"){
+                   if(tmduration>=0.5 && tmduration<=3){
+                    break;
+                   }
+                   else{
+                    tmduration=parseInt(prompt("Minimum Duration in hours (0.5 - 3): "));
+                   }
+                }
+            else{
+                tgenre=prompt("enter valid genre (rock, pop or jazz): ");
+            }
+        }
+        else{
+            tname=prompt("enter troupe name (3-30 characters): ");
+        }
+    }  
+
+    const troupe=new Troupe();
+    troupe.troupeName=tname;
+    troupe.troupeGenre=tgenre;
+    troupe.troupeMDuration=tmduration;
+    troupeRegistration(troupe);
+
+    console.log("Troupe registered successfully!");
+    console.log("Name: " + troupe.troupeName);
+    console.log("Genre: " +  troupe.troupeGenre);
+    console.log("Duration: " + troupe.troupeMDuration);
+    
+}
+
+function troupeRegistration(troupe){
+    troupeDetails.push(troupe);
+    console.log(troupeDetails);
+
+}
 
 
-module.exports={registerMusician,musicianRegistration};
+
+module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration};
 
 
 
