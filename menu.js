@@ -20,7 +20,7 @@ else if(choice==1){
     choice=0;
 }
 else if(choice==2){
-    
+    programFunctions.registerTroupe();
     choice=0;
 }
 else if(choice==3){
