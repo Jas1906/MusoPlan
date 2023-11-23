@@ -124,10 +124,51 @@ function troupeRegistration(troupe){
     console.log(troupeDetails);
 
 }
+function addMusicianToTroupe() {
+    // Display existing musicians and troupes
+    console.log("Existing Musicians:");
+    console.log(musicianDetails);
+    console.log("\nExisting Troupes:");
+    console.log(troupeDetails);
+
+    // Prompt user for musician and troupe selection
+    let musicianIndex = parseInt(prompt("Enter the index of the musician to add: "));
+    let troupeIndex = parseInt(prompt("Enter the index of the troupe to add the musician to: "));
+
+    // Check if the indices are valid
+    if (isNaN(musicianIndex) || musicianIndex < 0 || musicianIndex >= musicianDetails.length) {
+        console.log("Invalid musician index.");
+        return;
+    }
+
+    if (isNaN(troupeIndex) || troupeIndex < 0 || troupeIndex >= troupeDetails.length) {
+        console.log("Invalid troupe index.");
+        return;
+    }
+
+    // Get the selected musician and troupe
+    let selectedMusician = musicianDetails[musicianIndex];
+    let selectedTroupe = troupeDetails[troupeIndex];
+
+    // Check if the troupe already has 5 musicians
+    if (selectedTroupe.member.length >= 5) {
+        console.log("Troupe already has the maximum allowed musicians (5).");
+        return;
+    }
+
+    // Add the musician to the troupe
+    selectedTroupe.member.push(selectedMusician);
+
+    console.log("Musician added to troupe successfully!");
+    console.log("Musician Name: " + selectedMusician.musicianName);
+    console.log("Troupe Name: " + selectedTroupe.troupeName);
+    console.log("Updated Troupe Members: ");
+    console.log(selectedTroupe.member);
+}
 
 
 
-module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration};
+module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe};
 
 
 

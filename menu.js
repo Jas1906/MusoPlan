@@ -24,7 +24,7 @@ else if(choice==2){
     choice=0;
 }
 else if(choice==3){
-    
+    programFunctions.addMusicianToTroupe();
     choice=0;
 }
 else if(choice==4){

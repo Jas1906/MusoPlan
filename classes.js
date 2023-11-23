@@ -53,6 +53,7 @@ class Troupe{// start troupe
         this.troupe_name="";
         this.troupe_genre="";
         this.troupe_mduration="";
+        this.member=[];
 
     }
     set troupeName(tname){
