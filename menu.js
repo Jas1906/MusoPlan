@@ -36,7 +36,7 @@ else if(choice==5){
     choice=0;
 }
 else if(choice==6){
-    
+    programFunctions.calculateDeploymentCost();
     choice=0;
 }
 else if(choice==7){

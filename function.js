@@ -237,9 +237,45 @@ function displayTroupeDetails() {
     }
 }
 
+function calculateDeploymentCost() {
+    // Display existing Troupes
+    console.log("Existing Troupes:");
+    console.log(troupeDetails);
+
+    // Prompt user for the troupe name
+    let troupeName = prompt("Enter the name of the troupe for deployment:");
+
+    // Search for the troupe in troupeDetails array
+    const troupe = troupeDetails.find((troupe) => troupe.troupeName === troupeName);
+
+    // If the troupe is found, proceed with deployment cost calculation
+    if (troupe) {
+        let hours = parseFloat(prompt("Enter the number of hours for deployment:"));
+
+        // Validate the input for hours
+        while (isNaN(hours) || hours <= 0) {
+            console.log("Invalid input for hours. Please enter a positive number.");
+            hours = parseFloat(prompt("Re-enter the number of hours for deployment:"));
+        }
+
+        // Calculate the deployment cost based on the individual musician's hourly rate
+        let deploymentCost = 0;
+
+        troupe.member.forEach((musician) => {
+            deploymentCost += hours * musician.hourlyRate;
+        });
+
+        // Display the calculated deployment cost
+        console.log("Deployment Cost for Troupe " + troupe.troupeName + " for " + hours + " hours: $" + deploymentCost.toFixed(2));
+    } else {
+        console.log("Troupe not found.");
+    }
+}
 
 
-module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails};
+
+
+module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails,calculateDeploymentCost};
 
 
 
