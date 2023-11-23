@@ -211,9 +211,35 @@ function displayTroupeInformation() {
     }
 }
 
+function displayTroupeDetails() {
+    // Display existing Troupes
+    console.log("Existing Troupes:");
+    console.log(troupeDetails);
+
+    // Prompt user for the troupe name
+    let troupeName = prompt("Enter the name of the troupe to display information:");
+
+    // Search for the troupe in troupeDetails array
+    const troupe = troupeDetails.find((troupe) => troupe.troupeName === troupeName);
+
+    // If the troupe is found, display information
+    if (troupe) {
+        console.log("Troupe Name: " + troupe.troupeName);
+
+        // Display information about each musician in the troupe
+        troupe.member.forEach((musician) => {
+            console.log(musician.constructor.name + "s:");
+            console.log("Interesting Fact: " + musician.interestingFact);
+            console.log("Name: " + musician.musicianName + ", Hourly Rate: " + musician.hourlyRate);
+        });
+    } else {
+        console.log("Troupe not found.");
+    }
+}
 
 
-module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation};
+
+module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails};
 
 
 

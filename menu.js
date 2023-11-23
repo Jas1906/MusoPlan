@@ -32,7 +32,7 @@ else if(choice==4){
     choice=0;
 }
 else if(choice==5){
-    
+    programFunctions.displayTroupeDetails();
     choice=0;
 }
 else if(choice==6){
