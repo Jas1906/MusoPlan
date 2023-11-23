@@ -44,7 +44,7 @@ else if(choice==7){
     choice=0;
 }
 else if(choice==8){
-    
+    programFunctions.printTroupeDetailsToFile();
     choice=0;
 }
 else if(choice==9){

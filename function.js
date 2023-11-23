@@ -292,12 +292,46 @@ function printTroupeNamesToFile() {
 
     console.log("Troupe names have been saved to the file: " + fileName);
 }
+function printTroupeDetailsToFile() {
+    // Display existing Troupes
+    console.log("Existing Troupes:");
+    console.log(troupeDetails);
+
+    // Prompt user for the file name
+    let fileName = prompt("Enter the file name (with extension) to save Troupe details:");
+
+    // Create a writable stream to the file
+    const stream = fs.createWriteStream(fileName);
+
+    // Write Troupe details to the file
+    troupeDetails.forEach((troupe) => {
+        stream.write("Troupe Name: " + troupe.troupeName + "\n");
+        stream.write("Genre: " + troupe.troupeGenre + "\n");
+        stream.write("Minimum Duration: " + troupe.troupeMDuration + " hours\n");
+
+        // Display information about each musician in the troupe
+        troupe.member.forEach((musician) => {
+            stream.write(musician.constructor.name + ":\n");
+            stream.write("Interesting Fact: " + musician.interestingFact + "\n");
+            stream.write("Name: " + musician.musicianName + ", Hourly Rate: $" + musician.hourlyRate + "\n");
+        });
+
+        // Add a separator between troupes
+        stream.write("\n------------------------\n\n");
+    });
+
+    // Close the stream
+    stream.end();
+
+    console.log("Troupe details have been saved to the file: " + fileName);
+}
 
 
 
 
 
-module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails,calculateDeploymentCost,printTroupeNamesToFile};
+
+module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails,calculateDeploymentCost,printTroupeNamesToFile,printTroupeDetailsToFile};
 
 
 
