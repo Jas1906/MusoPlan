@@ -40,7 +40,7 @@ else if(choice==6){
     choice=0;
 }
 else if(choice==7){
-    
+    programFunctions.printTroupeNamesToFile();
     choice=0;
 }
 else if(choice==8){

@@ -271,11 +271,33 @@ function calculateDeploymentCost() {
         console.log("Troupe not found.");
     }
 }
+function printTroupeNamesToFile() {
+    // Display existing Troupes
+    console.log("Existing Troupes:");
+    console.log(troupeDetails);
+
+    // Prompt user for the file name
+    let fileName = prompt("Enter the file name (with extension) to save Troupe names:");
+
+    // Create a writable stream to the file
+    const stream = fs.createWriteStream(fileName);
+
+    // Write Troupe names to the file
+    troupeDetails.forEach((troupe) => {
+        stream.write(troupe.troupeName + "\n");
+    });
+
+    // Close the stream
+    stream.end();
+
+    console.log("Troupe names have been saved to the file: " + fileName);
+}
 
 
 
 
-module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails,calculateDeploymentCost};
+
+module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails,calculateDeploymentCost,printTroupeNamesToFile};
 
 
 
