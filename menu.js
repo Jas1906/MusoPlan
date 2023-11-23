@@ -28,7 +28,7 @@ else if(choice==3){
     choice=0;
 }
 else if(choice==4){
-    
+    programFunctions.displayTroupeInformation();
     choice=0;
 }
 else if(choice==5){

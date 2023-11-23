@@ -166,9 +166,54 @@ function addMusicianToTroupe() {
     console.log(selectedTroupe.member);
 }
 
+function displayTroupeInformation() {
+    // Display existing Troupes
+    console.log("Existing Troupes:");
+    console.log(troupeDetails);
+
+    // Prompt user for the troupe name
+    let troupeName = prompt("Enter the name of the troupe to display information:");
+
+    // Search for the troupe in troupeDetails array
+    const troupe = troupeDetails.find((troupe) => troupe.troupeName === troupeName);
+
+    // If the troupe is found, display information
+    if (troupe) {
+        console.log("Troupe Name: " + troupe.troupeName);
+
+        // Count the number of each type of musician in the troupe
+        const musicianCounts = {
+            Guitarists: 0,
+            Bassists: 0,
+            Percussionists: 0,
+            Flautists: 0,
+        };
+
+        troupe.member.forEach((musician) => {
+            if (musician instanceof Guitarist) {
+                musicianCounts.Guitarists++;
+            } else if (musician instanceof Bassist) {
+                musicianCounts.Bassists++;
+            } else if (musician instanceof Percussionist) {
+                musicianCounts.Percussionists++;
+            } else if (musician instanceof Flautist) {
+                musicianCounts.Flautists++;
+            }
+        });
+
+        // Display musician counts for each type
+        console.log("Guitarists: " + musicianCounts.Guitarists);
+        console.log("Bassists: " + musicianCounts.Bassists);
+        console.log("Percussionists: " + musicianCounts.Percussionists);
+        console.log("Flautists: " + musicianCounts.Flautists);
+    } else {
+        console.log("Troupe not found.");
+    }
+}
 
 
-module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe};
+
+module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation};
 
 
 
