@@ -275,27 +275,44 @@ function calculateDeploymentCost() {
         console.log("Troupe not found.");
     }
 }
-function printTroupeNamesToFile() {
-    // Display existing Troupes
-    console.log("Existing Troupes:");
-    console.log(troupeDetails);
 
+function readTroupeDetailsFromFile() {
     // Prompt user for the file name
-    let fileName = prompt("Enter the file name (with extension) to save Troupe names:");
+    let fileName = prompt("Enter the file name (with extension) containing troupe details:");
 
-    // Create a writable stream to the file
-    const stream = fs.createWriteStream(fileName);
+    try {
+        // Read the content of the file
+        const fileContent = fs.readFileSync(fileName, 'utf-8');
 
-    // Write Troupe names to the file
-    troupeDetails.forEach((troupe) => {
-        stream.write(troupe.troupeName + "\n");
-    });
+        // Split the content into an array of lines
+        const lines = fileContent.trim().split('\n');
 
-    // Close the stream
-    stream.end();
+        // Create troupe objects with the given details
+        const troupeObjects = lines.map((line) => {
+            const [troupeName, troupeGenre, troupeMDuration] = line.split(',').map((item) => item.trim());
 
-    console.log("Troupe names have been saved to the file: " + fileName);
+            const troupe = new Troupe();
+            troupe.troupeName = troupeName;
+            troupe.troupeGenre = troupeGenre;
+            troupe.troupeMDuration = parseFloat(troupeMDuration);
+
+            return troupe;
+        });
+
+        // Display the created troupe objects
+        console.log("Troupes created from file:");
+        console.log(troupeObjects);
+
+        // Optionally, you can return the array of troupe objects
+        return troupeObjects;
+    } catch (error) {
+        console.error("Error reading the file:", error.message);
+        // Optionally, you can handle the error as needed
+    }
 }
+
+
+
 function printTroupeDetailsToFile() {
     // Display existing Troupes
     console.log("Existing Troupes:");
@@ -336,7 +353,7 @@ function printTroupeDetailsToFile() {
 
 
 
-module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails,calculateDeploymentCost,printTroupeNamesToFile,printTroupeDetailsToFile};
+module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails,calculateDeploymentCost, readTroupeDetailsFromFile,printTroupeDetailsToFile};
 
 
 
