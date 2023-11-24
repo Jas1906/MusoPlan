@@ -304,31 +304,32 @@ function printTroupeDetailsToFile() {
     // Prompt user for the file name
     let fileName = prompt("Enter the file name (with extension) to save Troupe details:");
 
-    // Create a writable stream to the file
-    const stream = fs.createWriteStream(fileName);
+    // Create a string to store the content
+    let fileContent = "";
 
-    // Write Troupe details to the file
+    // Write Troupe details to the content string
     troupeDetails.forEach((troupe) => {
-        stream.write("Troupe Name: " + troupe.troupeName + "\n");
-        stream.write("Genre: " + troupe.troupeGenre + "\n");
-        stream.write("Minimum Duration: " + troupe.troupeMDuration + " hours\n");
+        fileContent += "Troupe Name: " + troupe.troupeName + "\n";
+        fileContent += "Genre: " + troupe.troupeGenre + "\n";
+        fileContent += "Minimum Duration: " + troupe.troupeMDuration + " hours\n";
 
         // Display information about each musician in the troupe
         troupe.member.forEach((musician) => {
-            stream.write(musician.constructor.name + ":\n");
-            stream.write("Interesting Fact: " + musician.interestingFact + "\n");
-            stream.write("Name: " + musician.musicianName + ", Hourly Rate: $" + musician.hourlyRate + "\n");
+            fileContent += musician.constructor.name + ":\n";
+            fileContent += "Interesting Fact: " + musician.interestingFact + "\n";
+            fileContent += "Name: " + musician.musicianName + ", Hourly Rate: $" + musician.hourlyRate + "\n";
         });
 
         // Add a separator between troupes
-        stream.write("\n------------------------\n\n");
+        fileContent += "\n------------------------\n\n";
     });
 
-    // Close the stream
-    stream.end();
+    // Write the content to the file
+    fs.writeFileSync(fileName, fileContent);
 
     console.log("Troupe details have been saved to the file: " + fileName);
 }
+
 
 
 
