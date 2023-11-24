@@ -15,25 +15,25 @@ function registerMusician() {
     let hrate = parseFloat(prompt("Enter hourly rate (over 50):"));
     let ifact = prompt("Choose an instrument (Guitarist, Bassist, Percussionist, Flautist):");
 
-    
+    //check if input are valid
     while (mname.length < 3 || mname.length > 30) {
         console.log("Invalid musician name. It should be between 3 and 30 characters.");
         mname = prompt("Re-enter musician name:");
     }
 
-    
+    //check if input are valid
     while (isNaN(yplaying) || yplaying < 0) {
         console.log("Invalid value for years playing. It should be non-negative.");
         yplaying = parseInt(prompt("Re-enter years playing:"));
     }
 
-    
+    //check if input are valid
     while (isNaN(hrate) || hrate <= 50) {
         console.log("Invalid hourly rate. It should be over 50.");
         hrate = parseFloat(prompt("Re-enter hourly rate:"));
     }
 
-    
+    //choice of instrument and create a class based on choice
     let musician;
     switch (ifact) {
         case 'Guitarist':
@@ -69,7 +69,7 @@ function registerMusician() {
             return;
     }
 
-    
+    //display musician
     console.log("Musician registered successfully!");
     console.log("Name: " + musician.musicianName);
     console.log("Years Playing: " + musician.yearsPlaying);
@@ -87,6 +87,7 @@ function registerTroupe(){
     let tgenre="";
     let tmduration=0;
 
+    //check if value are valid
     while(true){
         if(tname.length>=3 && tname.length<=30){
             if(tgenre=="rock" || tgenre=="pop" || tgenre=="jazz"){
@@ -105,13 +106,14 @@ function registerTroupe(){
             tname=prompt("enter troupe name (3-30 characters): ");
         }
     }  
-
+    // if valid create a troupe
     const troupe=new Troupe();
     troupe.troupeName=tname;
     troupe.troupeGenre=tgenre;
     troupe.troupeMDuration=tmduration;
     troupeRegistration(troupe);
 
+    //display troupes
     console.log("Troupe registered successfully!");
     console.log("Name: " + troupe.troupeName);
     console.log("Genre: " +  troupe.troupeGenre);
@@ -181,7 +183,7 @@ function displayTroupeInformation() {
     // Search for the troupe in troupeDetails array
     const troupe = troupeDetails.find((troupe) => troupe.troupeName === troupeName);
 
-    // If the troupe is found, display information
+    // If the troupe is found display information
     if (troupe) {
         console.log("Troupe Name: " + troupe.troupeName);
 
@@ -226,7 +228,7 @@ function displayTroupeDetails() {
     // Search for the troupe in troupeDetails array
     const troupe = troupeDetails.find((troupe) => troupe.troupeName === troupeName);
 
-    // If the troupe is found, display information
+    // If the troupe is found display information
     if (troupe) {
         console.log("Troupe Name: " + troupe.troupeName);
 
@@ -252,7 +254,7 @@ function calculateDeploymentCost() {
     // Search for the troupe in troupeDetails array
     const troupe = troupeDetails.find((troupe) => troupe.troupeName === troupeName);
 
-    // If the troupe is found, proceed with deployment cost calculation
+    // If the troupe is found proceed with deployment cost calculation
     if (troupe) {
         let hours = parseFloat(prompt("Enter the number of hours for deployment:"));
 
@@ -262,7 +264,7 @@ function calculateDeploymentCost() {
             hours = parseFloat(prompt("Re-enter the number of hours for deployment:"));
         }
 
-        // Calculate the deployment cost based on the individual musician's hourly rate
+        // Calculate the deployment cost based on the individual musicians hourly rate
         let deploymentCost = 0;
 
         troupe.member.forEach((musician) => {
@@ -284,10 +286,10 @@ function readTroupeDetailsFromFile() {
         // Read the content of the file
         const fileContent = fs.readFileSync(fileName, 'utf-8');
 
-        // Split the content into an array of lines
+        // Split the content into array of lines
         const lines = fileContent.trim().split('\n');
 
-        // Create troupe objects with the given details
+        // Create troupe from file content value split with comma
         const troupeObjects = lines.map((line) => {
             const [troupeName, troupeGenre, troupeMDuration] = line.split(',').map((item) => item.trim());
 
@@ -299,61 +301,57 @@ function readTroupeDetailsFromFile() {
             return troupe;
         });
 
-        // Display the created troupe objects
+        // display troupe
         console.log("Troupes created from file:");
         console.log(troupeObjects);
 
-        // Optionally, you can return the array of troupe objects
         return troupeObjects;
     } catch (error) {
         console.error("Error reading the file:", error.message);
+
+    }
+}
+
+
+
+function printAllTroupesToFile() {
+    // Prompt user for the file name
+    let fileName = prompt("Enter the file name (with extension) to save all troupe details:");
+
+    try {
+        // Create a string to store the content
+        let fileContent = "";
+
+        // Write troupe details to the content string
+        troupeDetails.forEach((troupe) => {
+            fileContent += "Troupe Name: " + troupe.troupeName + "\n";
+            fileContent += "Genre: " + troupe.troupeGenre + "\n";
+            fileContent += "Minimum Duration: " + troupe.troupeMDuration + " hours\n";
+
+            // Display information about each musician in the troupe
+            troupe.member.forEach((musician) => {
+                fileContent += musician.constructor.name + ":\n";
+                fileContent += "Interesting Fact: " + musician.interestingFact + "\n";
+                fileContent += "Name: " + musician.musicianName + ", Hourly Rate: $" + musician.hourlyRate + "\n";
+            });
+
+            // Add a separator between troupes
+            fileContent += "\n------------------------\n\n";
+        });
+
+        // Write the content to the file
+        fs.writeFileSync(fileName, fileContent);
+
+        console.log("All troupe details have been saved to the file: " + fileName);
+    } catch (error) {
+        console.error("Error writing to the file:", error.message);
         // Optionally, you can handle the error as needed
     }
 }
 
 
 
-function printTroupeDetailsToFile() {
-    // Display existing Troupes
-    console.log("Existing Troupes:");
-    console.log(troupeDetails);
-
-    // Prompt user for the file name
-    let fileName = prompt("Enter the file name (with extension) to save Troupe details:");
-
-    // Create a string to store the content
-    let fileContent = "";
-
-    // Write Troupe details to the content string
-    troupeDetails.forEach((troupe) => {
-        fileContent += "Troupe Name: " + troupe.troupeName + "\n";
-        fileContent += "Genre: " + troupe.troupeGenre + "\n";
-        fileContent += "Minimum Duration: " + troupe.troupeMDuration + " hours\n";
-
-        // Display information about each musician in the troupe
-        troupe.member.forEach((musician) => {
-            fileContent += musician.constructor.name + ":\n";
-            fileContent += "Interesting Fact: " + musician.interestingFact + "\n";
-            fileContent += "Name: " + musician.musicianName + ", Hourly Rate: $" + musician.hourlyRate + "\n";
-        });
-
-        // Add a separator between troupes
-        fileContent += "\n------------------------\n\n";
-    });
-
-    // Write the content to the file
-    fs.writeFileSync(fileName, fileContent);
-
-    console.log("Troupe details have been saved to the file: " + fileName);
-}
-
-
-
-
-
-
-
-module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails,calculateDeploymentCost, readTroupeDetailsFromFile,printTroupeDetailsToFile};
+module.exports={registerMusician,musicianRegistration,registerTroupe,troupeRegistration,addMusicianToTroupe,displayTroupeInformation,displayTroupeDetails,calculateDeploymentCost, readTroupeDetailsFromFile,printAllTroupesToFile};
 
 
 
