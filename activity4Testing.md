@@ -28,9 +28,9 @@ display below taking into consederation that there is already an existing musici
 
 |Input|Expected Output|Actual Output|
 |---|---|---|
-|0, 1|Musician Name: Jason, Troupe Name: Jammers|Musician Name: Jason, Troupe Name: Jammers|
-|1, 1|Musician Name: Jessica, Troupe Name: Jammers|Musician Name: Jessica, Troupe Name: Jammers|
-|1, 2|invalid musician index|invalid musician index|
+|Jason, Jammers|Musician Name: Jason, Troupe Name: Jammers|Musician Name: Jason, Troupe Name: Jammers|
+|Jessica, Jammers|Musician Name: Jessica, Troupe Name: Jammers|Musician Name: Jessica, Troupe Name: Jammers|
+|J, B|invalid musician name, invalid troupe name|invalid musician name, invalid troupe name|
 
 ### Function 4 Summary Description of a troupe
 
@@ -70,13 +70,15 @@ display below taking into consideration that "jammers" troupe exist and have 1 m
 
 ### Function 7 Read a list of troupe names to be populated from a file
 
-Select option 7 -> enter filename and extension -> loops back into main menu and file should be created
+Select option 7 -> enter filename and extension to read from -> loops back into main menu and display the recently registered new troupes from file
+
+display taking into consideration names.txt has troupe "amazing", list.txt has troupe "bangers" , and lemon.txt has troupe "lemon"  details in it
 
 |Input|Expected Output|Actual Output|
 |---|---|---|
-| names.txt | Troupe names have been saved to the file: names.txt | Troupe names have been saved to the file: names.txt |
-| list.txt | Troupe names have been saved to the file: list.txt | Troupe names have been saved to the file: list.txt |
-|lemon.txt  |Troupe names have been saved to the file: list.txt | Troupe names have been saved to the file: lemon.txt|
+| names.txt | Troupes created from file: troupe_name:amazing, troupe_genre: jazz, troupe.mduration:3 | Troupes created from file: troupe_name:amazing, troupe_genre: jazz, troupe.mduration:3 |
+| list.txt | Troupes created from file: troupe_name:bangers, troupe_genre: rock, troupe.mduration:3 | Troupes created from file: troupe_name:bangers, troupe_genre: rock, troupe.mduration:3 |
+|lemon.txt  |Troupes created from file: troupe_name:lemon, troupe_genre: pop, troupe.mduration:3 | Troupes created from file: troupe_name:lemon, troupe_genre: pop, troupe.mduration:3|
 
 ### Function 8 Write a list of the detailed descriptions for all troupes to a given filename
 
