@@ -286,11 +286,11 @@ function readTroupeDetailsFromFile() {
         // Read the content of the file
         const fileContent = fs.readFileSync(fileName, 'utf-8');
 
-        // Split the content into array of lines
+        // Split the content into an array of lines
         const lines = fileContent.trim().split('\n');
 
-        // Create troupe from file content value split with comma
-        const troupeObjects = lines.map((line) => {
+        // Create troupe objects with the given details from file
+        lines.forEach((line) => {
             const [troupeName, troupeGenre, troupeMDuration] = line.split(',').map((item) => item.trim());
 
             const troupe = new Troupe();
@@ -298,20 +298,17 @@ function readTroupeDetailsFromFile() {
             troupe.troupeGenre = troupeGenre;
             troupe.troupeMDuration = parseFloat(troupeMDuration);
 
-            return troupe;
+            troupeDetails.push(troupe);
         });
 
-        // display troupe
+        // Display the created troupe objects
         console.log("Troupes created from file:");
-        console.log(troupeObjects);
-
-        return troupeObjects;
+        console.log(troupeDetails);
     } catch (error) {
         console.error("Error reading the file:", error.message);
-
+        // error messasge
     }
 }
-
 
 
 function printAllTroupesToFile() {
