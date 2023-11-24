@@ -124,6 +124,7 @@ function troupeRegistration(troupe){
     console.log(troupeDetails);
 
 }
+
 function addMusicianToTroupe() {
     // Display existing musicians and troupes
     console.log("Existing Musicians:");
@@ -132,23 +133,25 @@ function addMusicianToTroupe() {
     console.log(troupeDetails);
 
     // Prompt user for musician and troupe selection
-    let musicianIndex = parseInt(prompt("Enter the index of the musician to add: "));
-    let troupeIndex = parseInt(prompt("Enter the index of the troupe to add the musician to: "));
+    let musicianName = prompt("Enter the name of the musician to add: ");
+    let troupeName = prompt("Enter the name of the troupe to add the musician to: ");
 
-    // Check if the indices are valid
-    if (isNaN(musicianIndex) || musicianIndex < 0 || musicianIndex >= musicianDetails.length) {
-        console.log("Invalid musician index.");
+    // Search for the musician in musicianDetails array
+    const selectedMusician = musicianDetails.find((musician) => musician.musicianName === musicianName);
+
+    // Search for the troupe in troupeDetails array
+    const selectedTroupe = troupeDetails.find((troupe) => troupe.troupeName === troupeName);
+
+    // Check if the musician and troupe are found
+    if (!selectedMusician) {
+        console.log("Musician not found.");
         return;
     }
 
-    if (isNaN(troupeIndex) || troupeIndex < 0 || troupeIndex >= troupeDetails.length) {
-        console.log("Invalid troupe index.");
+    if (!selectedTroupe) {
+        console.log("Troupe not found.");
         return;
     }
-
-    // Get the selected musician and troupe
-    let selectedMusician = musicianDetails[musicianIndex];
-    let selectedTroupe = troupeDetails[troupeIndex];
 
     // Check if the troupe already has 5 musicians
     if (selectedTroupe.member.length >= 5) {
@@ -165,6 +168,7 @@ function addMusicianToTroupe() {
     console.log("Updated Troupe Members: ");
     console.log(selectedTroupe.member);
 }
+
 
 function displayTroupeInformation() {
     // Display existing Troupes
