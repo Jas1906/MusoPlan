@@ -8,29 +8,44 @@ const {Musician,Troupe,Guitarist,Bassist,Percussionist,Flautist}=require('./clas
 var musicianDetails=new Array();
 var troupeDetails=new Array();
 
-function registerMusician() {
+function registerMusician(musicianName,yearsPlaying,hourlyRate,interestingFact) {
+
+    let mname= musicianName;
+    let yplaying = yearsPlaying;
+    let hrate = hourlyRate;
+    let ifact = interestingFact;
+
     // Prompt user for musician details
-    let mname= prompt("Enter musician name (between 3 and 30 characters):");
+    /*let mname= prompt("Enter musician name (between 3 and 30 characters):");
     let yplaying = parseInt(prompt("Enter years playing (non-negative):"));
     let hrate = parseFloat(prompt("Enter hourly rate (over 50):"));
     let ifact = prompt("Choose an instrument (Guitarist, Bassist, Percussionist, Flautist):");
+    */
+
+
 
     //check if input are valid
     while (mname.length < 3 || mname.length > 30) {
-        console.log("Invalid musician name. It should be between 3 and 30 characters.");
-        mname = prompt("Re-enter musician name:");
+        //console.log("Invalid musician name. It should be between 3 and 30 characters.");
+        //mname = prompt("Re-enter musician name:");
+        throw new Error ('Invalid musician name. It should be between 3 and 30 characters.');
+        
     }
 
     //check if input are valid
     while (isNaN(yplaying) || yplaying < 0) {
-        console.log("Invalid value for years playing. It should be non-negative.");
-        yplaying = parseInt(prompt("Re-enter years playing:"));
+        //console.log("Invalid value for years playing. It should be non-negative.");
+        //yplaying = parseInt(prompt("Re-enter years playing:"));
+        throw new Error ('Invalid value for years playing. It should be non-negative.');
+        
     }
 
     //check if input are valid
     while (isNaN(hrate) || hrate <= 50) {
-        console.log("Invalid hourly rate. It should be over 50.");
-        hrate = parseFloat(prompt("Re-enter hourly rate:"));
+        //console.log("Invalid hourly rate. It should be over 50.");
+        //hrate = parseFloat(prompt("Re-enter hourly rate:"));
+        throw new Error ('Invalid hourly rate. It should be over 50.');
+        
     }
 
     //choice of instrument and create a class based on choice
@@ -65,27 +80,40 @@ function registerMusician() {
             musicianRegistration(musician)
             break;
         default:
-            console.log("Invalid instrument choice. Choose from Guitarist, Bassist, Percussionist, Flautist.");
-            return;
+            //console.log("Invalid instrument choice. Choose from Guitarist, Bassist, Percussionist, Flautist.");
+            throw new Error('Invalid instrument choice. Choose from Guitarist, Bassist, Percussionist, Flautist.');
+            //return;
     }
 
     //display musician
-    console.log("Musician registered successfully!");
+    /*console.log("Musician registered successfully!");
     console.log("Name: " + musician.musicianName);
     console.log("Years Playing: " + musician.yearsPlaying);
     console.log("Hourly Rate: " + musician.hourlyRate);
     console.log("Interesting Fact: " + musician.interestingFact);
+    */
+
+    let string="Musician registered successfully!"+"Name: " + musician.musicianName+"Years Playing: " + musician.yearsPlaying+"Hourly Rate: " + musician.hourlyRate+"Interesting Fact: " + musician.interestingFact;
+    return string;
 }
 
 function musicianRegistration(musician){
+    musicianDetails = [];
     musicianDetails.push(musician);
-    console.log(musicianDetails);
+    //console.log(musicianDetails);
+    return musicianDetails;
 }
 
-function registerTroupe(){
-    let tname="";
+function registerTroupe(troupeName,troupeGenre,troupeMinDuration){
+
+    let tname=troupeName;
+    let tgenre=troupeGenre;
+    let tmduration=troupeMinDuration;
+
+    /*let tname="";
     let tgenre="";
     let tmduration=0;
+    */
 
     //check if value are valid
     while(true){
@@ -95,15 +123,18 @@ function registerTroupe(){
                     break;
                    }
                    else{
-                    tmduration=parseInt(prompt("Minimum Duration in hours (0.5 - 3): "));
+                    //tmduration=parseInt(prompt("Minimum Duration in hours (0.5 - 3): "));
+                    throw new Error('Minimum Duration in hours (0.5 - 3)');
                    }
                 }
             else{
-                tgenre=prompt("enter valid genre (rock, pop or jazz): ");
+                //tgenre=prompt("enter valid genre (rock, pop or jazz): ");
+                throw new Error('enter valid genre (rock, pop or jazz)');
             }
         }
         else{
-            tname=prompt("enter troupe name (3-30 characters): ");
+            //tname=prompt("enter troupe name (3-30 characters): ");
+            throw new Error('enter troupe name (3-30 characters)');
         }
     }  
     // if valid create a troupe
@@ -114,16 +145,22 @@ function registerTroupe(){
     troupeRegistration(troupe);
 
     //display troupes
-    console.log("Troupe registered successfully!");
+    /*console.log("Troupe registered successfully!");
     console.log("Name: " + troupe.troupeName);
     console.log("Genre: " +  troupe.troupeGenre);
     console.log("Duration: " + troupe.troupeMDuration);
+    */
+
+    let tresult="Troupe registered successfully!"+"Name: " + troupe.troupeName+"Genre: " +  troupe.troupeGenre+"Duration: " + troupe.troupeMDuration;
+    return tresult;
     
 }
 
 function troupeRegistration(troupe){
+    troupeDetails = [];
     troupeDetails.push(troupe);
-    console.log(troupeDetails);
+    //console.log(troupeDetails);
+    return troupeDetails;
 
 }
 
@@ -313,7 +350,7 @@ function readTroupeDetailsFromFile() {
 
 function printAllTroupesToFile() {
     // Prompt user for the file name
-    let fileName = prompt("Enter the file name (with extension) to save all troupe details:");
+    //let fileName = prompt("Enter the file name (with extension) to save all troupe details:");
 
     try {
         // Create a string to store the content
