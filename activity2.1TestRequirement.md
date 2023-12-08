@@ -49,3 +49,15 @@ Verify that the cost of deploying a troupe for a specified number of hours is ca
 Ensure that the software can read a list of troupe names from a file.
  - Write Troupe Descriptions to a File
 Verify that the software can write detailed descriptions for all troupes to a specified filename.
+
+### Organizational Requirements
+- All development will be done using a distributed version control system following organizational guidelines.
+- Code will adhere to MDN's General JavaScript guidelines.
+- A README.md file will be included with setup, operating, and testing instructions.
+- Unit tests will cover major functionalities, providing over 75% coverage.
+- JavaScript functions will include comments describing behavior and accepted parameter types.
+- Code will be appropriately commented with problem-solving strategies.
+- Automated testing results will be provided in JUnit XML format in the test progress report.
+
+### Testing Progress Reports
+- Each testing progress report will include a discussion of how testing fits into the software development life cycle (SDLC) of the MusoPlan project. An appendix with a JUnit XML document of the automated testing results will be attached to each report.
